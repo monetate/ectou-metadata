@@ -19,8 +19,8 @@ Usage
 Dependencies
 ------------
 
-- boto3 1.2.3
-- bottle 0.12.9
+- boto3 >= 1.2.0
+- bottle >= 0.12.0
 
 
 Examples

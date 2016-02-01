@@ -12,8 +12,6 @@ Mock subset of the `EC2 instance metadata`_ service to enable local virtual mach
 Usage
 -----
 
-Examples:
-
 .. code-block:: sh
 
     ectou_metadata [--host host] [--port port] [--role-arn role_arn]

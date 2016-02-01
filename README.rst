@@ -18,6 +18,12 @@ Examples:
 
     ectou_metadata [--host host] [--port port] [--role-arn role_arn]
 
+Dependencies
+------------
+
+- boto3 1.2.3
+- bottle 0.12.9
+
 
 Examples
 --------

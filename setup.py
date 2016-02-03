@@ -5,7 +5,7 @@ from setuptools import setup
 
 setup(
     name="ectou-metadata",
-    version="1.0.0",
+    version="1.0.2",
     description="Yet another EC2 instance metadata mocking service.",
     url="https://github.com/monetate/ectou-metadata",
     author='Monetate',

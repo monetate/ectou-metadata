@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from setuptools import setup, find_packages
+from setuptools import setup
 
 
 setup(
@@ -8,6 +8,8 @@ setup(
     version="1.0.0",
     description="Yet another EC2 instance metadata mocking service.",
     url="https://github.com/monetate/ectou-metadata",
+    author='Monetate',
+    author_email='jjpersch@monetate.com',
     license="MIT",
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -17,7 +19,9 @@ setup(
         "Programming Language :: Python :: 3",
     ],
     keywords="aws instance metadata",
-    packages=find_packages(),
+    packages=[
+        'ectou_metadata',
+    ],
     install_requires=[
         "boto3",
         "bottle",

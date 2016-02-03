@@ -22,4 +22,14 @@ Dependencies
 - boto3 >= 1.2.0
 - bottle >= 0.12.0
 
+
+Examples
+--------
+.. toctree::
+   docker
+   :maxdepth: 2
+
+
+
 .. _EC2 instance metadata: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+

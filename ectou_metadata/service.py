@@ -132,7 +132,7 @@ def instance_id():
 @bottle.route("/latest/meta-data/instance-type")
 def instance_type():
     bottle.response.content_type = 'text/plain'
-    return "m4.deadbeef"
+    return "m1.small"
 
 
 @bottle.route("/latest/meta-data/ami-id")

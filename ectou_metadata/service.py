@@ -62,8 +62,10 @@ def latest():
 
 @bottle.route("/latest/meta-data/")
 def meta_data():
-    return _index(["iam/",
+    return _index(["ami-id",
+                   "iam/",
                    "instance-id",
+                   "instance-type",
                    "local-ipv4",
                    "placement/",
                    "public-hostname",
@@ -126,6 +128,15 @@ def instance_id():
     bottle.response.content_type = 'text/plain'
     return "i-deadbeef"
 
+@bottle.route("/latest/meta-data/instance-type")
+def instance_id():
+    bottle.response.content_type = 'text/plain'
+    return "m4.large"
+
+@bottle.route("/latest/meta-data/ami-id")
+def instance_id():
+    bottle.response.content_type = 'text/plain'
+    return "ami-00000042"
 
 @bottle.route("/latest/meta-data/local-ipv4")
 def local_ipv4():

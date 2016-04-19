@@ -128,15 +128,18 @@ def instance_id():
     bottle.response.content_type = 'text/plain'
     return "i-deadbeef"
 
+
 @bottle.route("/latest/meta-data/instance-type")
 def instance_id():
     bottle.response.content_type = 'text/plain'
-    return "m4.large"
+    return "m4.deadbeef"
+
 
 @bottle.route("/latest/meta-data/ami-id")
 def instance_id():
     bottle.response.content_type = 'text/plain'
-    return "ami-00000042"
+    return "ami-deadbeef"
+
 
 @bottle.route("/latest/meta-data/local-ipv4")
 def local_ipv4():

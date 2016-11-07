@@ -6,6 +6,7 @@ http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
 
 import datetime
 import json
+import os
 
 import boto3.session
 import botocore.session
@@ -15,15 +16,32 @@ import dateutil.tz
 
 _refresh_timeout = datetime.timedelta(minutes=5)
 _role_arn = None
+_ip_dir = None
 
 _credential_map = {}
 
 
+def _lookup_ip_role_arn(source_ip):
+    try:
+        if _ip_dir and source_ip:
+            with open(os.path.join(_ip_dir, source_ip)) as f:
+                return f.readline().strip()
+    except IOError:
+        pass  # no such file
+
+
 def _get_role_arn():
     """
-    Return role arn from X-Role-ARN header, or fall back to command line default.
+    Return role arn from X-Role-ARN header,
+    lookup role arn from source IP,
+    or fall back to command line default.
     """
-    return bottle.request.headers.get('X-Role-ARN', _role_arn)
+    role_arn = bottle.request.headers.get('X-Role-ARN')
+    if not role_arn:
+        role_arn = _lookup_ip_role_arn(bottle.request.environ.get('REMOTE_ADDR'))
+    if not role_arn:
+        role_arn = _role_arn
+    return role_arn
 
 
 def _format_iso(dt):
@@ -176,11 +194,15 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--host', default="169.254.169.254")
     parser.add_argument('--port', default=80)
-    parser.add_argument('--role-arn')
+    parser.add_argument('--role-arn', help="Default role ARN.")
+    parser.add_argument('--ip-dir', help="Directory containing configuration files named by source ip.")
     args = parser.parse_args()
 
     global _role_arn
     _role_arn = args.role_arn
+
+    global _ip_dir
+    _ip_dir = args.ip_dir
 
     app = bottle.default_app()
     app.run(host=args.host, port=args.port)

@@ -16,15 +16,15 @@ import dateutil.tz
 
 _refresh_timeout = datetime.timedelta(minutes=5)
 _role_arn = None
-_ip_dir = None
+_conf_dir = None
 
 _credential_map = {}
 
 
 def _lookup_ip_role_arn(source_ip):
     try:
-        if _ip_dir and source_ip:
-            with open(os.path.join(_ip_dir, source_ip)) as f:
+        if _conf_dir and source_ip:
+            with open(os.path.join(_conf_dir, source_ip)) as f:
                 return f.readline().strip()
     except IOError:
         pass  # no such file
@@ -195,14 +195,14 @@ def main():
     parser.add_argument('--host', default="169.254.169.254")
     parser.add_argument('--port', default=80)
     parser.add_argument('--role-arn', help="Default role ARN.")
-    parser.add_argument('--ip-dir', help="Directory containing configuration files named by source ip.")
+    parser.add_argument('--conf-dir', help="Directory containing configuration files named by source ip.")
     args = parser.parse_args()
 
     global _role_arn
     _role_arn = args.role_arn
 
-    global _ip_dir
-    _ip_dir = args.ip_dir
+    global _conf_dir
+    _conf_dir = args.conf_dir
 
     app = bottle.default_app()
     app.run(host=args.host, port=args.port)

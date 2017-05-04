@@ -187,6 +187,17 @@ def public_ipv4():
     bottle.response.content_type = 'text/plain'
     return "127.0.0.1"
 
+@bottle.route("/latest/dynamic/instance-identity<slashes:re:/*>")
+def instance_identity_index(slashes):
+    bottle.response.content_type = 'text/plain'
+    return 'document'
+
+
+@bottle.route("/latest/dynamic/instance-identity<slashes1:re:/+>document<slashes2:re:/*>")
+def instance_identity_document(slashes1, slashes2):
+    bottle.response.content_type = 'text/plain'
+    return '{"region": "us-east-1"}'
+
 
 def main():
     import argparse
